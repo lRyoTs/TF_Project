@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
     private float gravityValue = -9.81f;
     [SerializeField]
     private Vector3 verticalVelocity;
+    [SerializeField]
+    [Range(0.0f, 0.3f)]
+    private float RotationSmoothTime = 0.12f;
 
     private Vector2 movementDirection;
     private Vector2 lookDirection;
@@ -82,6 +85,8 @@ public class PlayerController : MonoBehaviour
     private const float MAXIMUN_WALK_VELOCITY = 0.5f;
     private const float MAXIMUN_RUN_VELOCITY = 2f;
 
+    //player
+    private float rotationVelocity;
     #endregion
 
 
@@ -188,12 +193,16 @@ public class PlayerController : MonoBehaviour
 
         Vector3 direction = GetMoveDirection();
 
+        //direction = direction.x * cameraTransform.right.normalized + direction.z * cameraTransform.forward.normalized;
+
         ChangeVelocity(direction.z, direction.x, currentMaxVelocity);
-        
-        direction = direction.x * cameraTransform.right.normalized + direction.z * cameraTransform.forward.normalized;
-        
+
         //Rotate towards camera
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraTransform.eulerAngles.y;
+        float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle,ref rotationVelocity, RotationSmoothTime);
+
+        transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
+
         Vector3 targetDirection = Quaternion.Euler(0.0f, targetAngle, 0.0f) * Vector3.forward;
 
         //Move player
@@ -219,6 +228,7 @@ public class PlayerController : MonoBehaviour
         // Cinemachine will follow this target
         CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
             _cinemachineTargetYaw, 0.0f);
+        //transform.transform.rotation = Quaternion.Euler(0.0f,CinemachineCameraTarget.transform.rotation.y,0.0f);
     }
 
     /// <summary>
@@ -235,11 +245,26 @@ public class PlayerController : MonoBehaviour
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
     }
 
+    public void SetSensitivity(float newSensitivity)
+    {
+        sensitivity = newSensitivity;
+    }
+
     private void UpdateAnimations()
     {
         //Movement Animation
         _animator.SetFloat("Velocity Z", velocityZ);
         _animator.SetFloat("Velocity X", velocityX);
+    }
+
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
     }
     #endregion
 
@@ -260,6 +285,7 @@ public class PlayerController : MonoBehaviour
     private void DoLook(InputAction.CallbackContext obj)
     {
         lookDirection = obj.ReadValue<Vector2>();
+        Debug.Log(lookDirection);
     }
 
     private void DoJump(InputAction.CallbackContext obj)
@@ -276,6 +302,18 @@ public class PlayerController : MonoBehaviour
     {
         InputActionsManager.ToggleActionMap(InputActionsManager.inputActions.UI);
     }
+
+    private void DoRun(InputAction.CallbackContext obj)
+    {
+        if (obj.canceled)
+        {
+            runPressed = false;
+        }
+        else
+        {
+            runPressed = true;
+        }
+    }
     #endregion
 
     private void OnEnable()
@@ -283,6 +321,10 @@ public class PlayerController : MonoBehaviour
         //General Subscribe
         InputActionsManager.inputActions.General.Jump.started += DoJump;
         InputActionsManager.inputActions.General.Pause.started += DoPause;
+
+        InputActionsManager.inputActions.General.Run.started += DoRun;
+        InputActionsManager.inputActions.General.Run.performed += DoRun;
+        InputActionsManager.inputActions.General.Run.canceled += DoRun;
 
         InputActionsManager.inputActions.General.Movement.started += DoMove;
         InputActionsManager.inputActions.General.Movement.performed += DoMove;
@@ -298,6 +340,10 @@ public class PlayerController : MonoBehaviour
         //General Unsubcribe
         InputActionsManager.inputActions.General.Jump.started -= DoJump;
         InputActionsManager.inputActions.General.Pause.started -= DoPause;
+
+        InputActionsManager.inputActions.General.Run.started -= DoRun;
+        InputActionsManager.inputActions.General.Run.performed -= DoRun;
+        InputActionsManager.inputActions.General.Run.canceled -= DoRun;
 
         InputActionsManager.inputActions.General.Movement.started -= DoMove;
         InputActionsManager.inputActions.General.Movement.performed -= DoMove;
