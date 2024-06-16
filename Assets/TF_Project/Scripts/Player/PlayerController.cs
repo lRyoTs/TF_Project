@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    enum PlayerState
     {
-        
+        Gameplay,
+        UI,
+        Dead
     }
+    [Header("References")]
+    private CharacterController _characterController;
+    private Animator _animator;
+    private PlayerControls _controls;
 
-    // Update is called once per frame
-    void Update()
+    private void HandleMovement()
     {
-        
+
     }
 }

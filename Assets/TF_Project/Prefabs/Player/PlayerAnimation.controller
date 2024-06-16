@@ -148,7 +148,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 67dda6a449982294e8490a25055974cb,
       type: 3}
-    m_Threshold: 0.030612247
+    m_Threshold: 0.026785715
     m_Position: {x: 0, y: 0.5}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -157,7 +157,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 27201848e52effd47b5dd663d7ae499d,
       type: 3}
-    m_Threshold: 0.061224494
+    m_Threshold: 0.05357143
     m_Position: {x: 0, y: 2}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -166,7 +166,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: e4c028ac4ef804f47814b47290dae017,
       type: 3}
-    m_Threshold: 0.091836736
+    m_Threshold: 0.08035714
     m_Position: {x: -0.5, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -175,7 +175,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: ac25cac4b487a914c87bb2cc44c22b6a,
       type: 3}
-    m_Threshold: 0.12244899
+    m_Threshold: 0.10714286
     m_Position: {x: 0.5, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -184,7 +184,7 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: 799c2dbe16df60348bf37c8c7073879c,
       type: 3}
-    m_Threshold: 0.15306123
+    m_Threshold: 0.13392857
     m_Position: {x: -2, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
@@ -193,8 +193,17 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: -203655887218126122, guid: dfded50212d1a924aa4ed5f39d30b6d8,
       type: 3}
-    m_Threshold: 0.18367347
+    m_Threshold: 0.16071428
     m_Position: {x: 2, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Velocity X
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: -203655887218126122, guid: d0618e7758b46ae4aae16ff23155cc2a,
+      type: 3}
+    m_Threshold: 0.1875
+    m_Position: {x: 0, y: -0.5}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Velocity X
