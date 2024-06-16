@@ -23,6 +23,6 @@ public class FollowTarget : MonoBehaviour
     private void MatchTargetTransform()
     {
         transform.position = target.position;
-        transform.rotation = target.localRotation;
+        transform.rotation = target.rotation;
     }
 }
