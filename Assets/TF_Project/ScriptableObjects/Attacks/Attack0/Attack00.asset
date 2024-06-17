@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c70a73603434de4da98dbbac8b0e64b, type: 3}
-  m_Name: Attack03
+  m_Name: Attack00
   m_EditorClassIdentifier: 
-  animatorOV: {fileID: 22100000, guid: 3418db486349b8c4d9d52c17921d83b9, type: 2}
-  multiplier: 1
+  animatorOV: {fileID: 22100000, guid: 0a9244e1426680147a0ffe10a80f4a91, type: 2}
+  multiplier: 0.5

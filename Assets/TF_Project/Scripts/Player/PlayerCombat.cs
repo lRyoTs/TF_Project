@@ -36,12 +36,12 @@ public class PlayerCombat : MonoBehaviour
             if(Time.time - lastClickedTime >= 0.3f)
             {
                 animator.runtimeAnimatorController = combo[comboCounter].animatorOV;
-                animator.Play("Attack",0,0);
+                animator.SetTrigger("Attack");
                 weapon.damage = combo[comboCounter].multiplier;
                 comboCounter++;
                 lastClickedTime = Time.time;
 
-                if(comboCounter > combo.Count)
+                if(comboCounter >= combo.Count)
                 {
                     comboCounter = 0;
                 }
