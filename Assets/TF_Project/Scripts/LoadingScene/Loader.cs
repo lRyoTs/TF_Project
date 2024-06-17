@@ -13,7 +13,7 @@ public static class Loader
     {
         MainMenu,
         LoadingScene,
-        BattleScene,
+        GamePrototype,
     }
 
     private static Scene sceneAux;

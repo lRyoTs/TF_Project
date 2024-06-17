@@ -34,7 +34,7 @@ public class MainMenuUI : MonoBehaviour
             DataPersistence.Instance.DeletePlayerPrefsInfo();
             DataPersistence.Instance.LoadFromPlayerPrefs();
             */
-            Loader.Load(Loader.Scene.BattleScene);
+            Loader.Load(Loader.Scene.GamePrototype);
         });
 
         continueGameButton.onClick.AddListener(() =>

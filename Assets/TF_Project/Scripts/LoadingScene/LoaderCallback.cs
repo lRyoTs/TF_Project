@@ -6,13 +6,14 @@ public class LoaderCallback : MonoBehaviour
 {
     private bool firstUpdate = true;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if (firstUpdate)
-        {
-            firstUpdate = false;
-            Loader.LoaderCallback();
-        }
+        StartCoroutine("TemporalWait");
+    }
+
+    private IEnumerator TemporalWait()
+    {
+        yield return new WaitForSeconds(5f);
+        Loader.LoaderCallback();
     }
 }
