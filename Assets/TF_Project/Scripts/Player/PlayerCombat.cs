@@ -31,12 +31,12 @@ public class PlayerCombat : MonoBehaviour
 
     private void Attack()
     {
-        if(Time.time - lastComboEnd > 0.2f && comboCounter <= combo.Count)
+        if(Time.time - lastComboEnd > 0.6f && comboCounter <= combo.Count)
         {
             StartCoroutine(AttackCooldown());
             CancelInvoke("EndCombo");
 
-            if(Time.time - lastClickedTime >= 0.3f)
+            if(Time.time - lastClickedTime >= 0.8f)
             {
                 animator.runtimeAnimatorController = combo[comboCounter].animatorOV;
                 animator.SetTrigger("Attack");

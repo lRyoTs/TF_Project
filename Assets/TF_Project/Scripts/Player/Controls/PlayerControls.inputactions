@@ -19,7 +19,7 @@
                     "type": "Value",
                     "id": "539c79ba-0390-44e6-a609-74336ec290e2",
                     "expectedControlType": "Vector2",
-                    "processors": "",
+                    "processors": "InvertVector2(invertX=false),ScaleVector2",
                     "interactions": "",
                     "initialStateCheck": true
                 },
