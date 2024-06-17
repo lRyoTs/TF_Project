@@ -300,7 +300,7 @@ public class PlayerController : MonoBehaviour
 
     private void DoPause(InputAction.CallbackContext obj)
     {
-        InputActionsManager.ToggleActionMap(InputActionsManager.inputActions.UI);
+        //InputActionsManager.ToggleActionMap(InputActionsManager.inputActions.UI);
     }
 
     private void DoRun(InputAction.CallbackContext obj)
