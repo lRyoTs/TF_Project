@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c70a73603434de4da98dbbac8b0e64b, type: 3}
   m_Name: Attack01
   m_EditorClassIdentifier: 
-  animatorOV: {fileID: 0}
+  animatorOV: {fileID: 22100000, guid: e3231dc450df5f842a49d8a79da40609, type: 2}
   multiplier: 0.5
