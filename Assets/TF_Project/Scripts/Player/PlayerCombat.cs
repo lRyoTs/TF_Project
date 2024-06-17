@@ -10,6 +10,7 @@ public class PlayerCombat : MonoBehaviour
     private float lastClickedTime;
     private float lastComboEnd;
     private int comboCounter;
+    private bool canAttack;
     [Header("References")]
     [SerializeField] private Animator animator;
     [SerializeField] private Weapon weapon;
@@ -19,6 +20,7 @@ public class PlayerCombat : MonoBehaviour
     void Start()
     {
         comboCounter = 0;
+        canAttack = true;
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if(Time.time - lastComboEnd > 0.2f && comboCounter <= combo.Count)
         {
+            StartCoroutine(AttackCooldown());
             CancelInvoke("EndCombo");
 
             if(Time.time - lastClickedTime >= 0.3f)
@@ -63,6 +66,14 @@ public class PlayerCombat : MonoBehaviour
         lastClickedTime = Time.time;
     }
 
+    private IEnumerator AttackCooldown()
+    {
+        canAttack = false;
+        InputActionsManager.DisableActionMap();
+        yield return new WaitForSeconds(1f);
+        InputActionsManager.ToggleActionMap(InputActionsManager.inputActions.General);
+        canAttack = true;
+    }
     private void OnEnable()
     {
         InputActionsManager.inputActions.General.BasicAttack.started += DoAttack;
@@ -70,11 +81,20 @@ public class PlayerCombat : MonoBehaviour
 
     private void DoAttack(InputAction.CallbackContext context)
     {
-        Attack();
+        if (canAttack)
+        {
+            Attack();
+        }
+        
     }
 
     private void OnDisable()
     {
         InputActionsManager.inputActions.General.BasicAttack.started -= DoAttack;
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 }
