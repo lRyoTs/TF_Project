@@ -1,13 +1,16 @@
 using Cinemachine;
-using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerAimController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField]
     private PlayerController _playerController;
+    [SerializeField]
+    private Image crosshair;
 
     [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
     [SerializeField] private LayerMask aimColliderLayerMask;
@@ -35,11 +38,13 @@ public class PlayerAimController : MonoBehaviour
         {
             aimVirtualCamera.gameObject.SetActive(true);
             _playerController.SetSensitivity(aimSensitivity);
+            crosshair.DOFade(1f, 1.5f);
         }
         else
         {
             aimVirtualCamera.gameObject.SetActive(false);
             _playerController.SetSensitivity(normalSensitivity);
+            crosshair.DOFade(0f, 1.5f);
         }
     }
 
